@@ -26,28 +26,31 @@ namespace TestTovar
 
         private void button1_Click(object sender, EventArgs e)
         {
+            CheckCountClick();
+
             string login = textBox1.Text;
             string password = textBox2.Text;
 
-            if(count >= 3)
-            {
-                timer1.Start();
-                button1.Enabled = false;
-            }
-
-            using(DataBase db = new DataBase())
+            using (DataBase db = new DataBase())
             {
                 DataTable users = db.ExecuteSql($"select * from Users where UserLogin = '{login}' and UserPassword = '{password}'");
 
                 if (users.Rows.Count > 0)
                 {
-                    Form1 form = new Form1();
-                    form.Show();
+                    this.OpenNewForm(new Form1(), true);
                 }
                 else MessageBox.Show("Пользователя не существует");
-            }
+            }    
+        }
 
-            count++;    
+        private void CheckCountClick()
+        {
+            if (count >= 3)
+            {
+                timer1.Start();
+                button1.Enabled = false;
+            }
+            count++;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

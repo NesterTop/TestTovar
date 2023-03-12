@@ -12,7 +12,7 @@ namespace TestTovar
     {
         bool _isConnected;
         SqlConnection _connection;
-        private string _connectionString = @"Data Source=DESKTOP-AVGELME\STP;Initial Catalog=trade;Integrated Security=True";
+        string _connectionString = @"Data Source=DESKTOP-AVGELME\STP;Initial Catalog=trade;Integrated Security=True";
 
         public DataBase()
         {
@@ -36,7 +36,6 @@ namespace TestTovar
         {
             DataTable dataTable = new DataTable();
             SqlCommand command = new SqlCommand(sql, _connection);
-
             var reader = command.ExecuteReader();
             dataTable.Load(reader);
 
